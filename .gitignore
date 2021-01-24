@@ -1,0 +1,5 @@
+# Library Files
+node_modules/
+
+#Envronment files
+config/development.cjs
