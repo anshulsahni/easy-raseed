@@ -1,0 +1,25 @@
+{
+  "name": "express-sequelize",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:server": "node src/app.js",
+    "start": "APP_ENV=development nodemon npm run start:server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "4.17.1",
+    "lodash.forown": "4.4.0",
+    "lodash.omit": "4.5.0",
+    "mongoose": "5.11.13",
+    "nanoid": "3.1.20"
+  },
+  "devDependencies": {
+    "nodemon": "2.0.7"
+  }
+}
