@@ -30,6 +30,7 @@ export default class Database {
   }
 }
 
-const { model, Model } = mongoose;
+const { model, Model, Schema } = mongoose;
 export { model as createModel };
 export { Model as DbRepo };
+export { Schema as BaseSchema };

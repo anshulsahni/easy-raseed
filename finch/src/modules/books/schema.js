@@ -6,6 +6,7 @@ const { Schema } = mongoose;
 
 import TenantSchema from '../tenant/schema.js';
 import LandlordSchema from '../landlord/schema.js';
+import ReceiptSchema from '../receipt/schema.js';
 
 export default class ReceiptBookSchema extends Schema {
   constructor() {
@@ -31,6 +32,8 @@ export default class ReceiptBookSchema extends Schema {
         required: true,
         select: true,
       },
+
+      receipts: [new ReceiptSchema()],
     });
   }
 }
