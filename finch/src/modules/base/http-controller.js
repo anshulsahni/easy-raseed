@@ -50,4 +50,12 @@ export default class HttpController {
 
     this.respondAllOkIn({ items, response, status });
   }
+
+  catchException(error, _request, response, _next) {
+    const {
+      httpStatus: status,
+      ...error,
+    }
+    this.respondWithError({ error, status, response });
+  }
 }

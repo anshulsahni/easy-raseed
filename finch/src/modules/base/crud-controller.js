@@ -1,12 +1,12 @@
 import { Router as ExpressRouter } from 'express';
 
-import { getIdRoute } from '../../helpers/http.js';
+import { getIdRoute, forwardException } from '../../helpers/http.js';
 
 import HttpController from './http-controller.js';
 
 export default class CrudController extends HttpController {
-  constructor({ app, service }) {
-    super();
+  constructor({ app }) {
+    super({ app });
     this.app = app;
     this.router = ExpressRouter();
   }
@@ -16,7 +16,7 @@ export default class CrudController extends HttpController {
 
     const item = await this.service.create(input);
 
-    this.respondWithResourceCreated({ item, response });
+    this.respondWithResourceCreated({ item: input, response });
   }
 
   async getById(request, response) {
@@ -38,11 +38,12 @@ export default class CrudController extends HttpController {
   initRoutes() {
     const idRoute = getIdRoute(this.baseRoute);
 
-    this.router.post(this.baseRoute, this.create.bind(this));
+    this.router.post(this.baseRoute, forwardException(this.create.bind(this)));
     this.router.get(idRoute, this.getById.bind(this));
     this.router.get(this.baseRoute, this.list.bind(this));
     this.router.patch(idRoute, this.update.bind(this));
 
     this.app.use(this.router);
+    this.app.use(this.catchException);
   }
 }
