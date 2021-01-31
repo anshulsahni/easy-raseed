@@ -1,0 +1,18 @@
+version: "3.9"
+services:
+  finch:
+    build: ./finch
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./finch:/app
+    environment:
+      - APP_ENV=development
+    depends_on:
+      - mongo
+    entrypoint: ["npm", "start"]
+
+  mongo:
+    image: mongo
+    volumes:
+      - ./data:/data/db
