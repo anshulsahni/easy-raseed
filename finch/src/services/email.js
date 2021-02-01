@@ -2,50 +2,63 @@ import nodemailer from 'nodemailer';
 
 import config from '../../config/index.js';
 
-const { emailSender, smtp } = config;
+import { isValidEmail } from '../helpers/validators.js';
+
+const { smtp } = config;
+
+const nodeMailerOptions = {
+  host: smtp.host,
+  port: smtp.port,
+  auth: {
+    user: smtp.user,
+    pass: smtp.password,
+  },
+}
 
 export default class Email {
 
   constructor() {
-    this.sender = emailSender;
-  }
+    this.transporter = nodemailer
+      .createTransport(nodeMailerOptions);
 
-  init() {
-    this.transporter = nodemailer.createTransport({
-      host: smtp.host,
-      port: smtp.port,
-      auth: {
-        user: smtp.user,
-        pass: smtp.password,
-      },
-    });
-
-    return this;
+    this.emailParams = {};
   }
 
   setSender(senderEmail) {
-    this.from = senderEmail;
+    this.emailParams.from = senderEmail;
     return this;
   }
 
   setReceiver(receiverEmail) {
-    this.to = receiverEmail;
+    this.emailParams.to = receiverEmail;
     return this;
   }
 
   setContent(bodyContent) {
-    this.html = bodyContent;
+    this.emailParams.html = bodyContent;
     return this;
   }
 
   async send() {
-    const { transporter, from, to, html } = this;
-    try {
-      const infoId = await transporter.sendMail({ from, to, html });
+    if (validateEmailParams(this.emailParams)) {
+      try {
+        const infoId = await this.transporter.sendMail({...this.emailParams});
 
-      console.log({ infoId });
-    } catch (error) {
-      console.log({error});
+        console.log({ infoId });
+      } catch (error) {
+        console.log({error});
+      }
     }
   }
+}
+
+export function validateEmailParams(emailParams) {
+  if (
+    isValidEmail(emailParams.to) &&
+    isValidEmail(emailParams.from) &&
+    emailParams.html
+  ) return true;
+
+  throw new Error('Email can\'t be send without all mandatory paramets');
+
 }

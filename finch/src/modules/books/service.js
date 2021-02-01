@@ -19,7 +19,7 @@ export default class BooksService {
       }
 
       if (shouldSendEmail.toTenant) {
-        sendEmailToTenant(book.tenant);
+        sendEmailToTenant(book.tenant, book.landlord);
       }
 
       return book.toPublicObject();
@@ -40,9 +40,9 @@ export default class BooksService {
 
 }
 
-function sendEmailToTenant(tenant) {
+function sendEmailToTenant(tenant, landlord) {
   (new EmailService())
-    .init()
+    .setSender(landlord.email)
     .setReceiver(tenant.email)
     .setContent(`<strong>In future you'll receive PDF here</strong>`)
     .send();
@@ -50,7 +50,7 @@ function sendEmailToTenant(tenant) {
 
 function sendEmailToLandlord(landlord, tenant) {
   (new EmailService())
-    .init()
+    .setSender(tenant.email)
     .setReceiver(landlord.email)
     .setContent(`<strong>${tenant.name} have sent you the rent receipts</strong>`)
     .send();
