@@ -1,3 +1,4 @@
+import { getRequestContext } from '../../middlewares/hooks.js';
 import Book from './repository.js';
 
 export default class BooksService {
@@ -12,6 +13,7 @@ export default class BooksService {
   }
 
   static async getById(id) {
+    console.log(getRequestContext(), 'from service');
     try {
       return (await Book.findByPublicIdOrFail(id))
         .toPublicObject();

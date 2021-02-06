@@ -1,6 +1,7 @@
 import { Router as ExpressRouter } from 'express';
 
 import { getIdRoute } from '../../helpers/http.js';
+import { getRequestContext } from '../../middlewares/hooks.js';
 
 import HttpController from './http-controller.js';
 
@@ -22,8 +23,8 @@ export default class CrudController extends HttpController {
   async getById(request, response) {
     const id = request.params.id;
 
+    console.log(getRequestContext(), 'from crud controller');
     const item = await this.service.getById(id);
-
     this.respondAllOk({ item, response });
   }
 

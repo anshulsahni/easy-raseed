@@ -1,3 +1,4 @@
+import { getRequestContext } from '../../middlewares/hooks.js';
 import { createModel } from '../../services/database.js';
 
 import BaseRepository from '../base/repository.js';
@@ -10,8 +11,9 @@ class BooksRepository extends BaseRepository {
   ];
 
   static async findByPublicIdOrFail(id) {
+    console.log(getRequestContext(), 'from repository before fetch');
     const data = await this.findOne({ id });
-
+    console.log(getRequestContext(), 'from repository after fetch');
     if (!data) {
       throw new Error('Entity Not Found');
     } else {

@@ -6,9 +6,14 @@ import ReceiptController from './modules/books/controller.js';
 
 import HttpServer from './http-server.js';
 import Database from './services/database.js';
+import {createRequestContext} from './middlewares/hooks.js';
 
 const middlewares = [
   json(),
+  (req, _1, next) => {
+    createRequestContext(req.body.id);
+    next();
+  }
 ];
 
 const server = new HttpServer({
