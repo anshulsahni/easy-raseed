@@ -1,5 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack');
+
+const appConfig = require('./config/environment.js');
 
 const config = {
   entry: './src/App.jsx',
@@ -32,6 +35,10 @@ const config = {
       template: './templates/index.pug',
       filename: 'index.html',
       inject: 'head',
+    }),
+
+    new webpack.DefinePlugin({
+      apiUrl: JSON.stringify(appConfig.apiUrl),
     }),
   ],
 

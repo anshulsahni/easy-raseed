@@ -8,9 +8,12 @@ import Form from '../ui/forms/Form.jsx';
 import { PrimaryRoundButton } from '../ui/buttons/RoundButton.jsx';
 import { PrimarySubmitButton } from '../ui/forms/SubmitButton.jsx';
 import { Page } from '../ui/layout/grid.js';
-
-import { arrayRange } from '../utils/array.js';
 import { getNewValues } from '../ui/forms/Form.jsx';
+
+import { arrayRange, arrayMap, arrayFlatten } from '../utils/array.js';
+import { objectMerge, omitFromObject } from '../utils/object.js';
+import { addPeriod, getYMDFormat, endOfPeriod } from '../utils/date.js';
+import { addReceipt } from '../utils/api.js';
 
 let AddBtnWrapper;
 let CreateReceiptWrapper;
@@ -29,9 +32,16 @@ export default function NewPage() {
   }
 
   function onSubmit(_, values) {
-    console.log({
+    const receiptsData = arrayMap(arrayRange(
+      receiptsCount),
+      (_, index) => objectMerge(
+        values.receipts[index],
+        extraValues.receipts[index],
+    ));
+
+    return addReceipt({
       ...values,
-      ...extraValues,
+      receipts: getReceiptsFromRawData(receiptsData),
     });
   }
 
@@ -62,7 +72,7 @@ export default function NewPage() {
           type="submit"
           text="Create"
           pendingText="Creating..."
-          onClick={(event) => { console.log(event) }}
+          onClick={onSubmit}
         />
       </Form>
     </Page>
@@ -77,3 +87,38 @@ AddBtnWrapper = styled.div`
 CreateReceiptWrapper = styled.div`
   margin-top: 10px;
 `;
+
+const periodEntityMap = {
+  monthly: 'months',
+  quaterly: 'quarters',
+  yearly: 'years',
+}
+
+function getReceiptsFromRawData(receiptsData) {
+  return arrayFlatten(arrayMap(receiptsData, ({
+    dateRange: { startDate, endDate },
+    ...restData
+  }) => getReceipts({startDate, endDate, ...restData})));
+}
+
+function getReceipts({
+  startDate,
+  endDate,
+  period,
+  amount,
+}) {
+  const periodEntity = periodEntityMap[period];
+  startDate = startDate.startOf(periodEntity);
+  endDate = endDate.endOf(periodEntity);
+  const numberOfReceipts = endDate.diff(startDate, periodEntity) + 1;
+
+  return arrayMap(arrayRange(numberOfReceipts), receiptNumber => {
+    const currStartDate = addPeriod(startDate, receiptNumber, periodEntity);
+
+    return {
+      amount: Number(amount),
+      startDate: getYMDFormat(currStartDate),
+      endDate: getYMDFormat(endOfPeriod(currStartDate, periodEntity)),
+    };
+  });
+}

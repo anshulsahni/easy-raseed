@@ -18,13 +18,13 @@ export default function WriteOwner(values = {}) {
       <FielGroup>
 
         <TextInput
-          name="owner.name"
+          name="landlord.name"
           value={values.name}
           label="Name"
         />
 
         <TextInput
-          name="owner.pan"
+          name="landlord.pan"
           value={values.pan}
           label="PAN No."
         />
@@ -34,11 +34,11 @@ export default function WriteOwner(values = {}) {
       <FieldGroup>
         <EmailInput
           value={values.email}
-          name="owner.email"
+          name="landlord.email"
         />
 
         <CheckboxInput
-          name="owner.sendEmail"
+          name="landlord.sendEmail"
           label="Send Email"
         />
       </FieldGroup>
