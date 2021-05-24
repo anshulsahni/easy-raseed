@@ -1,4 +1,5 @@
 import { json } from 'express';
+import cors from 'cors';
 
 import config from '../config/index.js';
 
@@ -9,6 +10,9 @@ import Database from './services/database.js';
 
 const middlewares = [
   json(),
+  cors({
+    origin: config.client.origin,
+  }),
 ];
 
 const server = new HttpServer({
