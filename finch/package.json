@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "2.8.5",
     "express": "4.17.1",
     "lodash.forown": "4.4.0",
     "lodash.omit": "4.5.0",
