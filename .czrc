@@ -1,0 +1,38 @@
+{
+  "path": "cz-conventional-changelog",
+  "types": {
+    "🍺feat": {
+      "description": "Feature Development"
+    },
+    "🐞fix": {
+      "description": "Bug Fix/Resolved Issue"
+    },
+    "🛠️refactor": {
+      "description": "Code change with no change in functionality"
+    },
+    "🧹lint": {
+      "description": "Fixed linting errors"
+    },
+    "🩺test": {
+      "description": "Added, Fixed or Removed test cases"
+    },
+    "📚docs": {
+      "description": "Changes in documentation"
+    },
+    "🗄️database": {
+      "description": "Changes in database schema"
+    },
+    "⚙️config": {
+      "description": "Environment or Config values"
+    },
+    "🏗️build": {
+      "description": "Build related changes"
+    },
+    "👮ci": {
+      "description": "Changes related to CI tools"
+    },
+    "🚀deploy": {
+      "description": "Changes affecting deployment"
+    }
+  }
+}
