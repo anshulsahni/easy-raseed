@@ -16,4 +16,4 @@ jobs:
       - name: Run commitlint on PR title
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: echo ${{ github.event.pull_request.title }}
