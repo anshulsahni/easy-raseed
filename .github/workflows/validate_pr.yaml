@@ -1,0 +1,19 @@
+name: Validate PR
+
+on:
+  pull_request:
+    types: [opened, edited, reopened]
+
+jobs:
+  pr-title-lint:
+    name: Lint PR title
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Commitlint
+        run: npm install @commitlint/cli
+
+      - name: Run commitlint on PR title
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
