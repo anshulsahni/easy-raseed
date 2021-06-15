@@ -11,9 +11,7 @@ jobs:
 
     steps:
       - name: Install Commitlint
-        run: npm install @commitlint/cli
+        run: npm install @commitlint/cli @commitlint/config-conventional
 
       - name: Run commitlint on PR title
-        env:
-          GITHUB_CONTEXT: ${{ toJSON(github) }}
-        run: echo ${{ github.event.pull_request.title }}
+        run: echo ${{ github.event.pull_request.title }} | commitlint --config prlint.config.js
