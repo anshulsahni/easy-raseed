@@ -1,7 +1,7 @@
 import UserRepository from '../repository.js';
 
 describe('#BooksRepository', () => {
-  describe('##findByPublicIdOrFail', () => {
+  describe('findByPublicIdOrFail', () => {
     test('should return the object returned by model', async () => {
       const _book = {
         id: 'sampleId12',

@@ -1,8 +1,8 @@
 import { omitRecursive } from '../object.js';
 
 describe('#helpers', () => {
-  describe('##object', () => {
-    describe('###omitRecursive', () => {
+  describe('object', () => {
+    describe('omitRecursive', () => {
 
       test('should omit properties from flat object', () => {
         const flatObj = {
