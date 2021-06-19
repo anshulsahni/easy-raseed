@@ -70,4 +70,31 @@ describe('BooksService', () => {
         .toThrow(Error);
     });
   });
+
+  describe('#getById', () => {
+    beforeEach(() => {
+      Book.mockClear();
+    });
+
+    test('should call Book#findByPublicId once with right args',async () => {
+      Book.findByPublicIdOrFail = jest.fn().mockImplementation(() => ({
+        toPublicObject: () => {},
+      }));
+
+      await BooksService.getById('sampleId');
+      expect(Book.findByPublicIdOrFail).toHaveBeenCalledTimes(1);
+      expect(Book.findByPublicIdOrFail).toHaveBeenCalledWith('sampleId');
+
+    });
+
+    test('should throw an exception if exception is thrown repo methods',async () => {
+      Book.findByPublicIdOrFail = jest.fn().mockImplementation(() => {
+        throw new Error();
+      });
+
+      await expect(BooksService.getById('sampleId'))
+        .rejects
+        .toThrow(Error);
+    });
+  });
 });
