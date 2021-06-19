@@ -5,9 +5,6 @@ jest.mock('mongoose');
 
 describe('DatabaseService', () => {
   describe('#connect', () => {
-    beforeEach(() => {
-    });
-
     test('should call mongoose.connect with right arguments',async () => {
       expect.assertions(5);
       const sampleOptions = {
