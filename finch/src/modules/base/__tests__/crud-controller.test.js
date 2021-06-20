@@ -4,6 +4,13 @@ import httpMocks from 'node-mocks-http';
 import CrudController from '../crud-controller.js';
 
 describe('CrudController', () => {
+  let mockService, crudController;
+  beforeEach(() => {
+    crudController = new CrudController({});
+    mockService = {};
+    crudController.service = mockService;
+  });
+
   describe('#create', () => {
     test('should call service#create() method with request payload',async () => {
 
@@ -15,14 +22,9 @@ describe('CrudController', () => {
         body: samplePayload,
       });
       const mockRes = httpMocks.createResponse();
+      crudController.service.create = jest.fn().mockReturnValueOnce(samplePayload);
 
-      const mockService = {
-        create: jest.fn().mockReturnValueOnce(samplePayload),
-      };
-
-      const controller = new CrudController({});
-      controller.service = mockService;
-      await controller.create(mockReq, mockRes);
+      await crudController.create(mockReq, mockRes);
 
       expect(mockService.create).toHaveBeenCalledTimes(1);
       expect(mockService.create).toHaveBeenCalledWith(samplePayload);
@@ -44,15 +46,11 @@ describe('CrudController', () => {
       });
       const mockRes = httpMocks.createResponse();
 
-      const mockService = {
-        getById: jest.fn().mockReturnValueOnce({
-          sample: 'response',
-        }),
-      };
+      crudController.service.getById = jest.fn().mockReturnValueOnce({
+        sample: 'response',
+      });
 
-      const controller = new CrudController({});
-      controller.service = mockService;
-      await controller.getById(mockReq, mockRes);
+      await crudController.getById(mockReq, mockRes);
 
       expect(mockService.getById).toHaveBeenCalledTimes(1);
       expect(mockService.getById).toHaveBeenCalledWith('sampleId');
@@ -72,7 +70,7 @@ describe('CrudController', () => {
       const mockReq = httpMocks.createRequest();
       const mockRes = httpMocks.createResponse();
 
-      (new CrudController({})).update(mockReq, mockRes);
+      crudController.update(mockReq, mockRes);
 
       expect(mockRes.statusCode).toBe(200);
       expect(mockRes._isJSON()).toBe(true);
@@ -86,7 +84,7 @@ describe('CrudController', () => {
       const mockReq = httpMocks.createRequest();
       const mockRes = httpMocks.createResponse();
 
-      (new CrudController({})).list(mockReq, mockRes);
+      crudController.list(mockReq, mockRes);
 
       expect(mockRes.statusCode).toBe(200);
       expect(mockRes._isJSON()).toBe(true);
