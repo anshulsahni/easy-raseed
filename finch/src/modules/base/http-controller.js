@@ -48,6 +48,6 @@ export default class HttpController {
 
     const status = httpResoponseCodes.OK;
 
-    this.respondAllOkIn({ items, response, status });
+    this.respondInJson({ data, response, status });
   }
 }

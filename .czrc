@@ -16,6 +16,9 @@
     "🩺test": {
       "description": "Added, Fixed or Removed test cases"
     },
+    "📦package": {
+      "description": "Changes in Package.json"
+    },
     "📚docs": {
       "description": "Changes in documentation"
     },

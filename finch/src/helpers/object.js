@@ -3,7 +3,7 @@ import omit from 'lodash.omit';
 
 import { isObject } from './type.js'
 
-export const omitRecursive = (object, props = []) => {
+export const omitRecursive = (object = {}, props = []) => {
   let newObject = omit(object, props);
   forOwn(newObject, (value, key) => {
     if (isObject(value)) {
