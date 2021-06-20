@@ -1,1 +1,1 @@
-export const getIdRoute = route => `${route}/:id`;
+export const getIdRoute = (route = '') => `${route}/:id`;
