@@ -1,14 +1,14 @@
-import { Router as ExpressRouter } from 'express';
+import { Router as expressRouter } from 'express';
 
 import { getIdRoute } from '../../helpers/http.js';
 
 import HttpController from './http-controller.js';
 
 export default class CrudController extends HttpController {
-  constructor({ app, service }) {
+  constructor({ app }) {
     super();
     this.app = app;
-    this.router = ExpressRouter();
+    this.router = expressRouter();
   }
 
   async create(request, response) {

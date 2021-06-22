@@ -2,11 +2,11 @@ import mongoose from 'mongoose';
 
 import { publicId } from '../../helpers/database.js';
 
-const { Schema } = mongoose;
-
 import TenantSchema from '../tenant/schema.js';
 import LandlordSchema from '../landlord/schema.js';
 import ReceiptSchema from '../receipt/schema.js';
+
+const { Schema } = mongoose;
 
 export default class ReceiptBookSchema extends Schema {
   constructor() {
