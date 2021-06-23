@@ -7,7 +7,7 @@ export default class BooksService {
     try {
       return (await book.save()).toPublicObject();
     } catch (error) {
-      throw error;
+      throw new Error(error);
     }
   }
 
@@ -16,7 +16,7 @@ export default class BooksService {
       return (await Book.findByPublicIdOrFail(id))
         .toPublicObject();
     } catch(error) {
-      throw error;
+      throw new Error(error);
     }
   }
 }

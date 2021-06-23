@@ -8,7 +8,8 @@
     "test": "jest",
     "test:ci": "jest --coverage",
     "start:server": "node src/app.js",
-    "start": "APP_ENV=development nodemon npm run start:server"
+    "start": "APP_ENV=development nodemon npm run start:server",
+    "lint": "eslint 'src/**/*' "
   },
   "keywords": [],
   "author": "",
@@ -24,6 +25,9 @@
   "devDependencies": {
     "@babel/core": "7.14.3",
     "@babel/preset-env": "7.14.4",
+    "eslint": "7.29.0",
+    "eslint-config-kentcdodds": "19.0.0",
+    "eslint-config-prettier": "8.3.0",
     "jest": "27.0.3",
     "mockingoose": "2.15.2",
     "node-mocks-http": "1.10.1",

@@ -27,8 +27,9 @@ describe('type helpers', () => {
     describe('should return true for following usecases', () => {
       test.each([
         [{}, 'empty object'],
+        // eslint-disable-next-line no-new-object
         [new Object(), 'using Object class'],
-        [new function(){}, 'initialiaze function'],
+        [new function something(){}, 'initialiaze function'],
         // TODO: with array it should return false
         [[5], 'array']
       ])('isObject(%s) //%s', (value) => {
