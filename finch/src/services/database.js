@@ -15,18 +15,25 @@ export default class Database {
       .on('open', this.open)
       .on('error', this.onError);
 
+    const connectOptions = {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+    };
+
     mongoose.connect(
       `mongodb://${this.host}/${this.name}`,
-      { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
+      connectOptions,
     );
   }
 
   open() {
-    console.log('connection successfull');
+    console.log('connection to mongodb successfull');
   }
 
-  onError() {
-    console.log('Slight technical glitch in connecting to mongo server');
+  onError(error) {
+    console.log('Error in connecting to mongodb', error);
+    process.exit(1);
   }
 }
 

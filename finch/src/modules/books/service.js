@@ -25,7 +25,7 @@ export default class BooksService {
       return book.toPublicObject();
 
     } catch (error) {
-      console.log({error});
+      throw new Error(error);
     }
   }
 
@@ -34,7 +34,7 @@ export default class BooksService {
       return (await Book.findByPublicIdOrFail(id))
         .toPublicObject();
     } catch(error) {
-      console.log({error});
+      throw new Error(error);
     }
   }
 

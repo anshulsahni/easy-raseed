@@ -3,3 +3,6 @@ node_modules/
 
 #Envronment files
 development.cjs
+
+#Docker compose volumes
+data/

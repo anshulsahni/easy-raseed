@@ -12,11 +12,11 @@ class BooksRepository extends BaseRepository {
   static async findByPublicIdOrFail(id) {
     const data = await this.findOne({ id });
 
-    if (!data) {
-      throw new Error('Entity Not Found');
-    } else {
+    if (data) {
       return data;
     }
+
+    throw new Error('Entity Not Found');
 
   }
 }

@@ -13,7 +13,7 @@ export default class HttpServer {
   }
 
   start() {
-    this.app.listen(this.options.port, () => {
+    this.app.listen(this.options.port, '0.0.0.0',() => {
       console.log(
         `App started on port: ${this.options.port}`
       );
