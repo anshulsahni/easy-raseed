@@ -4,9 +4,13 @@
  */
 
 import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-const appEnv = process.env.APP_ENV;
+import path from 'path';
 
+
+const appEnv = process.env.APP_ENV;
+const fileUrl = new URL(`file://${path.resolve('config', 'index.js')}`);
+
+const require = createRequire(fileUrl);
 const config = require(`./${appEnv}.cjs`);
 
 export default config;
