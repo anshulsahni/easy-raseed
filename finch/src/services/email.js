@@ -44,10 +44,12 @@ export default class Email {
       try {
         const infoId = await this.transporter.sendMail({...this.emailParams});
 
-        console.log({ infoId });
+        return infoId;
       } catch (error) {
-        console.log({error});
+        throw new Error(error);
       }
+    } else {
+      throw new Error('invalid email params');
     }
   }
 }
