@@ -1,6 +1,6 @@
-import Book from './repository.js';
-
 import EmailService from '../../services/email.js';
+
+import Book from './repository.js';
 
 export default class BooksService {
   static async create(input) {
