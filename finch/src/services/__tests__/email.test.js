@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer';
-import Email from '../email.js';
-import EmailService from '../email.js';
+import EmailService, { validateEmailParams } from '../email.js';
 
 jest.mock('nodemailer');
 
@@ -158,5 +157,44 @@ describe('EmailService', () => {
           .rejects
           .toThrowError('mock email error')
     });
+  });
+});
+
+describe('#validateEmailParams()', () => {
+  test('should return true if emails are valid & html is present', () => {
+    expect(validateEmailParams({
+      to: 'someone@sender.com',
+      from: 'someoneelse@receiver.com',
+      html: 'any_content',
+    })).toBe(true);
+  });
+
+  test('should raise excpetion if to email is invalid', () => {
+    expect(() => {
+      validateEmailParams({
+        to: 'someonesender.com',
+        from: 'someoneelse@receiver.com',
+        html: 'any_content',
+      });
+    }).toThrowError('Email can\'t be send without all mandatory paramets');
+  });
+
+  test('should raise excpetion if from email is invalid', () => {
+    expect(() => {
+      validateEmailParams({
+        to: 'someone@sender.com',
+        from: 'someoneelsereceiver.com',
+        html: 'any_content',
+      });
+    }).toThrowError('Email can\'t be send without all mandatory paramets');
+  });
+
+  test('should raise excpetion if emailParams.html is not present', () => {
+    expect(() => {
+      validateEmailParams({
+        to: 'someone@sender.com',
+        from: 'someoneelse@receiver.com',
+      });
+    }).toThrowError('Email can\'t be send without all mandatory paramets');
   });
 });
