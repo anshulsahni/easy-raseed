@@ -1,11 +1,29 @@
+import EmailService from '../../services/email.js';
+
 import Book from './repository.js';
 
 export default class BooksService {
   static async create(input) {
-    const book = new Book(input);
+    let book = new Book(input);
+
+    const shouldSendEmail = {
+      toLandlord: input?.landlord?.sendEmail,
+      toTenant: input?.tenant?.sendEmail,
+    };
 
     try {
-      return (await book.save()).toPublicObject();
+      book = await book.save();
+
+      if (shouldSendEmail.toLandlord) {
+        sendEmailToLandlord(book.landlord, book.tenant);
+      }
+
+      if (shouldSendEmail.toTenant) {
+        sendEmailToTenant(book.tenant, book.landlord);
+      }
+
+      return book.toPublicObject();
+
     } catch (error) {
       throw new Error(error);
     }
@@ -19,4 +37,21 @@ export default class BooksService {
       throw new Error(error);
     }
   }
+
+}
+
+function sendEmailToTenant(tenant, landlord) {
+  (new EmailService())
+    .setSender(landlord.email)
+    .setReceiver(tenant.email)
+    .setContent(`<strong>In future you'll receive PDF here</strong>`)
+    .send();
+}
+
+function sendEmailToLandlord(landlord, tenant) {
+  (new EmailService())
+    .setSender(tenant.email)
+    .setReceiver(landlord.email)
+    .setContent(`<strong>${tenant.name} have sent you the rent receipts</strong>`)
+    .send();
 }

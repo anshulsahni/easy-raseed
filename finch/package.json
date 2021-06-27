@@ -5,8 +5,8 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:ci": "jest --coverage",
+    "test": "APP_ENV=test jest",
+    "test:ci": "APP_ENV=test jest --coverage",
     "start:server": "node src/app.js",
     "start": "APP_ENV=development nodemon npm run start:server",
     "lint": "eslint 'src/**/*' "
@@ -20,7 +20,8 @@
     "lodash.forown": "4.4.0",
     "lodash.omit": "4.5.0",
     "mongoose": "5.11.13",
-    "nanoid": "3.1.20"
+    "nanoid": "3.1.20",
+    "nodemailer": "6.4.17"
   },
   "devDependencies": {
     "@babel/core": "7.14.3",
