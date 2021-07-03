@@ -42,7 +42,7 @@ describe('HTTPController', () => {
       };
 
       controller.respondWithError({
-        error: sampleError,
+        errorData: sampleError,
         status: 400,
         response: mockResp,
       });
@@ -50,10 +50,13 @@ describe('HTTPController', () => {
       expect(mockResp.statusCode).toBe(400);
       expect(mockResp._isJSON()).toBe(true);
       expect(mockResp._isEndCalled()).toBe(true);
+
       expect(mockResp._getJSONData()).toStrictEqual({
-        success: false,
-        error: sampleError,
+        error: {
+          msg: 'Some error message',
+        },
       });
+
     });
   });
 
