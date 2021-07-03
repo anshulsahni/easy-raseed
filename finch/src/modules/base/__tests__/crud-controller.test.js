@@ -121,4 +121,32 @@ describe('CrudController', () => {
 
     });
   });
+
+  describe('#handleException', () => {
+    test('should return a callback which returns passed callback in return value, ', () => {
+      const mockControllerFn = jest.fn().mockReturnValue(new Promise(() => {}));
+
+      const req = { mockReq: true };
+      const res = { mockRes: true };
+      crudController.handleException(mockControllerFn)(req, res);
+
+      expect(mockControllerFn).toHaveBeenCalledTimes(1);
+      expect(mockControllerFn).toHaveBeenCalledWith(req, res);
+
+    });
+
+    test('should  call next callback when controller rejects', () => {
+      const mockCatch = jest.fn();
+      const mockControllerFn = jest
+        .fn()
+        .mockReturnValue({ catch: mockCatch });
+      const mockNext = jest.fn();
+
+      crudController
+        .handleException(mockControllerFn)({}, {}, mockNext);
+
+      expect(mockCatch).toHaveBeenCalledWith(mockNext);
+
+    });
+  });
 });
