@@ -1,3 +1,4 @@
+import AppError, { DB_OPERATIONS_ERROR } from '../../error/app-error.js';
 import EmailService from '../../services/email.js';
 
 import Book from './repository.js';
@@ -25,7 +26,7 @@ export default class BooksService {
       return book.toPublicObject();
 
     } catch (error) {
-      throw new Error(error);
+      throw new AppError(DB_OPERATIONS_ERROR);
     }
   }
 
