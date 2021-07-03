@@ -13,7 +13,6 @@ export default class CatchController extends HttpController {
    * For more 👉 https://expressjs.com/en/guide/error-handling.html
    */
   handleError(error, _request, response, _next) {
-    console.log({error}, 'from handle error');
     const {
       publicMessage,
       httpStatusCode: status,
