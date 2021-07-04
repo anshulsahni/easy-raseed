@@ -15,13 +15,13 @@ const middlewares = [
   }),
 ];
 
+
 const server = new HttpServer({
-  port: 8888,
+  port: config.server.port,
   middlewares,
 });
 
 const database = new Database(config.database);
-
 
 server.start();
 

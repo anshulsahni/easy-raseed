@@ -8,7 +8,7 @@
     "test": "APP_ENV=test jest",
     "test:ci": "APP_ENV=test jest --coverage",
     "start:server": "node src/app.js",
-    "start": "APP_ENV=development nodemon npm run start:server",
+    "start": "APP_ENV=development nodemon --delay 0.5 npm run start:server",
     "lint": "eslint 'src/**/*' "
   },
   "keywords": [],
