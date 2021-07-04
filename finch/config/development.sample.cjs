@@ -15,4 +15,8 @@ module.exports = {
   },
 
   emailSender: 'noreply@easyraseed.in',
+
+  server: {
+    port: 8888,
+  },
 };

@@ -1,11 +1,14 @@
 import express from 'express';
 
+
+const DEFAULT_PORT = 3000;
+
 export default class HttpServer {
   constructor(options = {}) {
     this.app = express();
 
     this.options = {
-      port: options.port || 3000,
+      port: options.port || DEFAULT_PORT,
       middlewares: options.middlewares || [],
     }
 
