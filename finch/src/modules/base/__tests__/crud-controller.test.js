@@ -99,6 +99,7 @@ describe('CrudController', () => {
       const app = express();
       const controller = new CrudController({ app });
       controller.baseRoute = '/test';
+      controller.handleException = jest.fn();
       controller.router.post = jest.fn();
       controller.router.get = jest.fn();
       controller.router.patch = jest.fn();
@@ -107,17 +108,45 @@ describe('CrudController', () => {
 
       expect(controller.router.post).toHaveBeenCalledTimes(1);
       expect(controller.router.post.mock.calls[0][0]).toBe('/test');
-      expect(controller.router.post.mock.calls[0][1].name).toBe('bound create');
+      expect(controller.handleException.mock.calls[0][0].name).toBe('bound create');
 
       expect(controller.router.get).toHaveBeenCalledTimes(2);
       expect(controller.router.get.mock.calls[0][0]).toBe('/test/:id');
-      expect(controller.router.get.mock.calls[0][1].name).toBe('bound getById');
+      expect(controller.handleException.mock.calls[1][0].name).toBe('bound getById');
       expect(controller.router.get.mock.calls[1][0]).toBe('/test');
       expect(controller.router.get.mock.calls[1][1].name).toBe('bound list');
 
       expect(controller.router.patch).toHaveBeenCalledTimes(1);
       expect(controller.router.patch.mock.calls[0][0]).toBe('/test/:id');
       expect(controller.router.patch.mock.calls[0][1].name).toBe('bound update');
+
+    });
+  });
+
+  describe('#handleException', () => {
+    test('should return a callback which returns passed callback in return value, ', () => {
+      const mockControllerFn = jest.fn().mockReturnValue(new Promise(() => {}));
+
+      const req = { mockReq: true };
+      const res = { mockRes: true };
+      crudController.handleException(mockControllerFn)(req, res);
+
+      expect(mockControllerFn).toHaveBeenCalledTimes(1);
+      expect(mockControllerFn).toHaveBeenCalledWith(req, res);
+
+    });
+
+    test('should  call next callback when controller rejects', () => {
+      const mockCatch = jest.fn();
+      const mockControllerFn = jest
+        .fn()
+        .mockReturnValue({ catch: mockCatch });
+      const mockNext = jest.fn();
+
+      crudController
+        .handleException(mockControllerFn)({}, {}, mockNext);
+
+      expect(mockCatch).toHaveBeenCalledWith(mockNext);
 
     });
   });

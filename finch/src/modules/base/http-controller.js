@@ -8,10 +8,9 @@ export default class HttpController {
       .json(data);
   }
 
-  respondWithError({ error = {}, status, response }) {
+  respondWithError({ errorData = {}, status, response }) {
     const data = {
-      error,
-      success: false,
+      error: errorData,
     };
 
     this.respondInJson({ data,  status, response });

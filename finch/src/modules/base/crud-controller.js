@@ -35,11 +35,17 @@ export default class CrudController extends HttpController {
     this.respondInJson({ status: 200, response });
   }
 
+  handleException(controller) {
+    return (req, res, next) => {
+      controller(req, res).catch(next);
+    }
+  }
+
   initRoutes() {
     const idRoute = getIdRoute(this.baseRoute);
 
-    this.router.post(this.baseRoute, this.create.bind(this));
-    this.router.get(idRoute, this.getById.bind(this));
+    this.router.post(this.baseRoute, this.handleException(this.create.bind(this)));
+    this.router.get(idRoute, this.handleException(this.getById.bind(this)));
     this.router.get(this.baseRoute, this.list.bind(this));
     this.router.patch(idRoute, this.update.bind(this));
 
