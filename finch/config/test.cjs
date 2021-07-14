@@ -7,4 +7,6 @@ module.exports = {
     user: 'mock_user',
     password: 'mock_password',
   },
+
+  logs: {},
 };
