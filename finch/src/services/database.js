@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { logError, logInfo } from './logger.js';
 
 export default class Database {
   constructor(options) {
@@ -28,11 +29,11 @@ export default class Database {
   }
 
   open() {
-    console.log('connection to mongodb successfull');
+    logInfo('connection to mongodb successfull');
   }
 
   onError(error) {
-    console.log('Error in connecting to mongodb', error);
+    logError('Error in connecting to mongodb', error);
     process.exit(1);
   }
 }
