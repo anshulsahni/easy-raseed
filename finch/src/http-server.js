@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { logInfo } from './services/logger.js';
 
 const DEFAULT_PORT = 3000;
 
@@ -17,9 +18,7 @@ export default class HttpServer {
 
   start() {
     this.app.listen(this.options.port, '0.0.0.0',() => {
-      console.log(
-        `App started on port: ${this.options.port}`
-      );
+      logInfo('app started',{port: this.options.port});
     });
   }
 
