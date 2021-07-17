@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { theme } from '../../design-system/tokens.js';
 import { FormContext } from '../forms/Form.jsx';
-import RecButton from '../buttons/RectButton.jsx';
+import RecButton from '../buttons/RectButton.js';
 
 function SubmitButton({
   className,

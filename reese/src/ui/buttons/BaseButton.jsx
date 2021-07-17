@@ -11,7 +11,6 @@ const StyledBtn = styled.button`
 
 export default function BaseButton({
   onClick,
-  pendingText = 'Processing...',
   text = 'Submit',
   type = 'button',
   className,

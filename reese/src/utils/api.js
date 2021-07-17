@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// eslint-disable-next-line no-undef
 const apiBase = apiUrl;
 
 export function addReceipt(data) {

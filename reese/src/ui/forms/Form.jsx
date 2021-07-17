@@ -66,14 +66,16 @@ export function getNewValues(oldValues = {}, fieldName = '', fieldValue) {
   const lastPart = toNumberIfLikeNumber(fieldNameParts.pop());
 
   let values = newValues;
-  let part;
-  while (part = fieldNameParts.shift()) {
+  let part = fieldNameParts.shift();
+  while (part) {
     part = toNumberIfLikeNumber(part);
 
     if (!isObjectOrArray(values[part])) {
       values[part] = isLikeNumber(fieldNameParts[0]) ? [] : {};
     }
     values = values[part];
+
+    part = fieldNameParts.shift();
   }
 
   values[lastPart] = fieldValue;

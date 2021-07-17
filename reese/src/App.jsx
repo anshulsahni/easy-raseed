@@ -4,9 +4,7 @@ import Contents from './Contents.jsx'
 
 export default function App() {
   return (
-    <>
-      <Contents/>
-    </>
+    <Contents/>
   )
 }
 

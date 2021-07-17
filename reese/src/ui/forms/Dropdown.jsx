@@ -13,8 +13,6 @@ export default function Dropdown({
   name,
   label,
   options = [],
-  ansh,
-  emptySelectLabel = 'Select',
   ...props
 }) {
   const [error, setError] = useState('');

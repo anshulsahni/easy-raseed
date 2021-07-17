@@ -7,20 +7,21 @@ import { MonthInput, QuarterInput, YearInput } from '../forms/DateInput.jsx';
 import FieldGroup from '../forms/_elements/FieldGroup.js';
 import { Container } from '../layout/grid';
 
-var StyledDiv;
-
-const DEFAULT_PERIOD = 'monthly';
+const StyledDiv = styled.div`
+  border: 1px solid black;
+  padding: 20px;
+`;
 
 const getRentInputLabel = (period) => {
   const label = 'Rent Amount';
 
   switch (period) {
     case 'monthly':
-      return label + '(Per Month)';
+      return `${label  }(Per Month)`;
     case 'quaterly':
-      return label + '(Per Quarter)';
+      return `${label  }(Per Quarter)`;
     case 'yearly':
-      return label + '(Per Year)';
+      return `${label  }(Per Year)`;
     default:
       return label;
   }
@@ -99,6 +100,8 @@ function renderDateSelect({
     case 'yearly':
       SelectDateComponent=YearInput;
       break;
+    default:
+      return null;
   }
 
   return  (
@@ -110,8 +113,3 @@ function renderDateSelect({
     />
   );
 }
-
-StyledDiv = styled.div`
-  border: 1px solid black;
-  padding: 20px;
-`;

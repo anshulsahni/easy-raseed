@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DatePicker as AntDatePicker } from 'antd';
 
 import Label from './_elements/Label.js';

@@ -8,7 +8,11 @@ import FieldGroup from '../forms/_elements/FieldGroup.js';
 
 import { theme } from '../../design-system/tokens.js';
 
-let WriteTenantWrapper;
+const WriteTenantWrapper = styled.div`
+  border: 1px solid ${theme.borders.secondary};
+  margin-top: 5px;
+  padding: 20px;
+`;
 
 export default function WriteTenant(values = {}) {
   return (
@@ -34,9 +38,3 @@ export default function WriteTenant(values = {}) {
     </WriteTenantWrapper>
   )
 }
-
-WriteTenantWrapper = styled.div`
-  border: 1px solid ${theme.borders.secondary};
-  margin-top: 5px;
-  padding: 20px;
-`;

@@ -7,15 +7,18 @@ import EmailInput from '../forms/EmailInput.jsx';
 import CheckboxInput from '../forms/CheckboxInput.jsx';
 
 import { theme } from '../../design-system/tokens.js';
-import FielGroup from '../forms/_elements/FieldGroup.js';
 
-let WriteOwnerWrapper;
+const WriteOwnerWrapper = styled.div`
+  border: 1px solid ${theme.borders.secondary};
+  margin-top: 5px;
+  padding: 20px;
+`;
 
 export default function WriteOwner(values = {}) {
   return (
     <WriteOwnerWrapper>
       <h3>Owner Details</h3>
-      <FielGroup>
+      <FieldGroup>
 
         <TextInput
           name="landlord.name"
@@ -29,7 +32,7 @@ export default function WriteOwner(values = {}) {
           label="PAN No."
         />
 
-      </FielGroup>
+      </FieldGroup>
 
       <FieldGroup>
         <EmailInput
@@ -45,9 +48,3 @@ export default function WriteOwner(values = {}) {
     </WriteOwnerWrapper>
   )
 }
-
-WriteOwnerWrapper = styled.div`
-  border: 1px solid ${theme.borders.secondary};
-  margin-top: 5px;
-  padding: 20px;
-`;

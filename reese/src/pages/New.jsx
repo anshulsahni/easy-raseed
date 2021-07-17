@@ -4,19 +4,25 @@ import styled from 'styled-components';
 import CreateReceipt from '../ui/receipt/Create.jsx';
 import WriteTenant from '../ui/tenant/Write.jsx';
 import WriteOwner from '../ui/owner/Write.jsx';
-import Form from '../ui/forms/Form.jsx';
-import { PrimaryRoundButton } from '../ui/buttons/RoundButton.jsx';
+import Form, { getNewValues } from '../ui/forms/Form.jsx';
+import { PrimaryRoundButton } from '../ui/buttons/RoundButton.js';
 import { PrimarySubmitButton } from '../ui/forms/SubmitButton.jsx';
 import { Page } from '../ui/layout/grid.js';
-import { getNewValues } from '../ui/forms/Form.jsx';
+
 
 import { arrayRange, arrayMap, arrayFlatten } from '../utils/array.js';
-import { objectMerge, omitFromObject } from '../utils/object.js';
+import { objectMerge } from '../utils/object.js';
 import { addPeriod, getYMDFormat, endOfPeriod } from '../utils/date.js';
 import { addReceipt } from '../utils/api.js';
 
-let AddBtnWrapper;
-let CreateReceiptWrapper;
+const AddBtnWrapper = styled.div`
+ text-align: right;
+ margin-top: 10px;
+`;
+
+const CreateReceiptWrapper = styled.div`
+ margin-top: 10px;
+`;
 
 export default function NewPage() {
   const [receiptsCount, setReciptsCount] = useState(1);
@@ -34,7 +40,7 @@ export default function NewPage() {
   function onSubmit(_, values) {
     const receiptsData = arrayMap(arrayRange(
       receiptsCount),
-      (_, index) => objectMerge(
+      (_val, index) => objectMerge(
         values.receipts[index],
         extraValues.receipts[index],
     ));
@@ -78,15 +84,6 @@ export default function NewPage() {
     </Page>
   );
 }
-
-AddBtnWrapper = styled.div`
-  text-align: right;
-  margin-top: 10px;
-`;
-
-CreateReceiptWrapper = styled.div`
-  margin-top: 10px;
-`;
 
 const periodEntityMap = {
   monthly: 'months',
