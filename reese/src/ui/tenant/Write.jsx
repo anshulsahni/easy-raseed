@@ -18,23 +18,13 @@ export default function WriteTenant(values = {}) {
   return (
     <WriteTenantWrapper>
       <h3>Tenant Details</h3>
-      <TextInput
-        name="tenant.name"
-        value={values.name}
-        label="Name"
-      />
+      <TextInput name="tenant.name" value={values.name} label="Name" />
 
       <FieldGroup>
-        <EmailInput
-          value={values.email}
-          name="tenant.email"
-        />
+        <EmailInput value={values.email} name="tenant.email" />
 
-        <CheckboxInput
-          name="tenant.sendEmail"
-          label="Send Email"
-        />
+        <CheckboxInput name="tenant.sendEmail" label="Send Email" />
       </FieldGroup>
     </WriteTenantWrapper>
-  )
+  );
 }

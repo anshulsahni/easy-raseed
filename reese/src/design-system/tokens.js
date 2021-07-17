@@ -7,7 +7,6 @@ const brand = {
 };
 
 export const theme = {
-
   brand,
 
   forms: {
@@ -26,8 +25,8 @@ export const theme = {
     },
 
     border: {
-      primary: colors.primary
-    }
+      primary: colors.primary,
+    },
   },
 
   buttons: {
@@ -48,5 +47,5 @@ export const theme = {
 
   body: {
     background: colors.white,
-  }
+  },
 };

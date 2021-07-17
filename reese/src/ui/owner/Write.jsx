@@ -19,32 +19,16 @@ export default function WriteOwner(values = {}) {
     <WriteOwnerWrapper>
       <h3>Owner Details</h3>
       <FieldGroup>
+        <TextInput name="landlord.name" value={values.name} label="Name" />
 
-        <TextInput
-          name="landlord.name"
-          value={values.name}
-          label="Name"
-        />
-
-        <TextInput
-          name="landlord.pan"
-          value={values.pan}
-          label="PAN No."
-        />
-
+        <TextInput name="landlord.pan" value={values.pan} label="PAN No." />
       </FieldGroup>
 
       <FieldGroup>
-        <EmailInput
-          value={values.email}
-          name="landlord.email"
-        />
+        <EmailInput value={values.email} name="landlord.email" />
 
-        <CheckboxInput
-          name="landlord.sendEmail"
-          label="Send Email"
-        />
+        <CheckboxInput name="landlord.sendEmail" label="Send Email" />
       </FieldGroup>
     </WriteOwnerWrapper>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
 
 const StyledBtn = styled.button`
@@ -9,19 +9,10 @@ const StyledBtn = styled.button`
   padding: 0;
 `;
 
-export default function BaseButton({
-  onClick,
-  text = 'Submit',
-  type = 'button',
-  className,
-}) {
+export default function BaseButton({ onClick, text = 'Submit', type = 'button', className }) {
   return (
-    <StyledBtn
-      onClick={onClick}
-      className={className}
-      type={type}
-    >
+    <StyledBtn onClick={onClick} className={className} type={type}>
       {text}
     </StyledBtn>
-  )
+  );
 }

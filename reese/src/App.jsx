@@ -1,16 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Contents from './Contents.jsx'
+import Contents from './Contents.jsx';
 
 export default function App() {
-  return (
-    <Contents/>
-  )
+  return <Contents />;
 }
 
 window.mountApp = function mountApp() {
-  render(
-    <App/>,
-    document.getElementById('app'),
-  );
-}
+  render(<App />, document.getElementById('app'));
+};

@@ -10,11 +10,7 @@ const contextIntitVal = {
 
 export const FormContext = React.createContext(contextIntitVal);
 
-export default function Form({
-  children,
-  onSubmit,
-  initialValues = {},
-}) {
+export default function Form({ children, onSubmit, initialValues = {} }) {
   const [values, setValues] = useState(initialValues);
   const [pending, setPending] = useState(false);
 
@@ -24,11 +20,7 @@ export default function Form({
     const fieldName = name || id;
     const fieldValue = type === 'checkbox' ? checked : value;
 
-    setValues((oldValues) => getNewValues(
-      oldValues,
-      fieldName,
-      fieldValue,
-    ));
+    setValues((oldValues) => getNewValues(oldValues, fieldName, fieldValue));
   }
 
   function handleSubmit(event) {
@@ -37,22 +29,17 @@ export default function Form({
     if (isPromise(result)) {
       setPending(true);
 
-      result
-        .finally(() => {
-          setPending(false);
-        });
+      result.finally(() => {
+        setPending(false);
+      });
     }
-
 
     return result;
   }
 
   return (
-    <FormContext.Provider value={{ pending }} >
-      <form
-        onSubmit={handleSubmit}
-        onChange={onChange}
-      >
+    <FormContext.Provider value={{ pending }}>
+      <form onSubmit={handleSubmit} onChange={onChange}>
         {children}
       </form>
     </FormContext.Provider>
@@ -80,8 +67,7 @@ export function getNewValues(oldValues = {}, fieldName = '', fieldValue) {
 
   values[lastPart] = fieldValue;
 
-
-  return {...newValues};
+  return { ...newValues };
 }
 
 function toNumberIfLikeNumber(value) {

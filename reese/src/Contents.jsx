@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import New from './pages/New.jsx';
 
@@ -12,9 +8,9 @@ export default function Contents() {
     <Router>
       <Switch>
         <Route path="/new">
-          <New/>
+          <New />
         </Route>
       </Switch>
     </Router>
-  )
+  );
 }

@@ -7,8 +7,7 @@ const Label = styled.label`
   font-size: 14px;
   display: block;
   margin-bottom: 2px;
-  ${props => props.inline ? 'display: inline-block;' : ''}
+  ${(props) => (props.inline ? 'display: inline-block;' : '')}
 `;
-
 
 export default Label;

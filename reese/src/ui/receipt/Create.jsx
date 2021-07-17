@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 import NumberInput from '../forms/NumberInput.jsx';
-import Dropdown from '../forms/Dropdown.jsx'
+import Dropdown from '../forms/Dropdown.jsx';
 import { MonthInput, QuarterInput, YearInput } from '../forms/DateInput.jsx';
 import FieldGroup from '../forms/_elements/FieldGroup.js';
 import { Container } from '../layout/grid';
@@ -17,26 +17,23 @@ const getRentInputLabel = (period) => {
 
   switch (period) {
     case 'monthly':
-      return `${label  }(Per Month)`;
+      return `${label}(Per Month)`;
     case 'quaterly':
-      return `${label  }(Per Quarter)`;
+      return `${label}(Per Quarter)`;
     case 'yearly':
-      return `${label  }(Per Year)`;
+      return `${label}(Per Year)`;
     default:
       return label;
   }
-}
+};
 
 const periodOptions = [
   { value: 'monthly', label: 'Monthly' },
   { value: 'quaterly', label: 'Quaterly' },
-  { value: 'yearly', label:'Yearly' },
+  { value: 'yearly', label: 'Yearly' },
 ];
 
-export default function WriteReceipt({
-  index,
-  onExtraValueChange,
-}) {
+export default function WriteReceipt({ index, onExtraValueChange }) {
   const [period, setPeriod] = useState('monthly');
   const [dateRange, setDateRange] = useState([]);
 
@@ -48,63 +45,54 @@ export default function WriteReceipt({
     onExtraValueChange(newPeriod, periodFieldName);
   }
 
-  function onDateRangeChange([startDate, endDate]){
+  function onDateRangeChange([startDate, endDate]) {
     setDateRange([startDate, endDate]);
-    onExtraValueChange({startDate, endDate}, dateRangeFieldName);
+    onExtraValueChange({ startDate, endDate }, dateRangeFieldName);
   }
 
   return (
     <StyledDiv>
-        <Container>
-          <FieldGroup>
-            <Dropdown
-              options={periodOptions}
-              onChange={onPeriodChangeInternal}
-              value={period}
-              label="Select Rental Period"
-              name={periodFieldName}
-            />
+      <Container>
+        <FieldGroup>
+          <Dropdown
+            options={periodOptions}
+            onChange={onPeriodChangeInternal}
+            value={period}
+            label="Select Rental Period"
+            name={periodFieldName}
+          />
 
-            <NumberInput
-              label={getRentInputLabel(period)}
-              name={`receipts.${index}.amount`}
-            />
+          <NumberInput label={getRentInputLabel(period)} name={`receipts.${index}.amount`} />
+        </FieldGroup>
 
-          </FieldGroup>
-
-          {renderDateSelect({
-            period,
-            dateRangeFieldName,
-            onDateRangeChange,
-            dateRange,
-          })}
-        </Container>
+        {renderDateSelect({
+          period,
+          dateRangeFieldName,
+          onDateRangeChange,
+          dateRange,
+        })}
+      </Container>
     </StyledDiv>
   );
 }
 
-function renderDateSelect({
-  period,
-  dateRangeFieldName,
-  onDateRangeChange,
-  dateRange,
-}) {
+function renderDateSelect({ period, dateRangeFieldName, onDateRangeChange, dateRange }) {
   let SelectDateComponent;
-  switch(period) {
+  switch (period) {
     case 'monthly':
-      SelectDateComponent=MonthInput;
+      SelectDateComponent = MonthInput;
       break;
     case 'quaterly':
-      SelectDateComponent=QuarterInput;
+      SelectDateComponent = QuarterInput;
       break;
     case 'yearly':
-      SelectDateComponent=YearInput;
+      SelectDateComponent = YearInput;
       break;
     default:
       return null;
   }
 
-  return  (
+  return (
     <SelectDateComponent
       name={dateRangeFieldName}
       onChange={onDateRangeChange}
