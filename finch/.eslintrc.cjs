@@ -1,14 +1,16 @@
 module.exports = {
-  extends: 'kentcdodds',
+  extends: ['kentcdodds', 'prettier'],
+  plugins: ['prettier'],
   rules: {
-    'no-console': [
-      'error',
-    ],
+    'no-console': ['error'],
+    'prettier/prettier': 'error',
   },
-  overrides: [{
-    files: ['src/**/*.test.js'],
-    env: {
-      jest: true,
+  overrides: [
+    {
+      files: ['src/**/*.test.js'],
+      env: {
+        jest: true,
+      },
     },
-  }],
+  ],
 };
