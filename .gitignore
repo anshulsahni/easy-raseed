@@ -1,3 +1,6 @@
+#Editor Directory/Files
+.vscode/
+
 # Library Files
 node_modules/
 
