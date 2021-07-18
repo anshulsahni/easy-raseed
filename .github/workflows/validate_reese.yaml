@@ -1,6 +1,10 @@
 name: Validate Reese
 on:
-  push:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
     paths:
       - "reese/**"
 
