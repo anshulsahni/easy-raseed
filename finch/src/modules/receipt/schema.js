@@ -10,23 +10,23 @@ export default class ReceiptSchema extends BaseSchema {
         select: true,
       },
 
-     startDate: {
-       type: Date,
-       required: true,
-       select: true,
-     },
+      startDate: {
+        type: Date,
+        required: true,
+        select: true,
+      },
 
-     endDate: {
-       type: Date,
-       required: true,
-       select: true,
-     },
+      endDate: {
+        type: Date,
+        required: true,
+        select: true,
+      },
 
-     paid: {
-       type: Boolean,
-       select: true,
-       default: true,
-     },
+      paid: {
+        type: Boolean,
+        select: true,
+        default: true,
+      },
     });
   }
 }

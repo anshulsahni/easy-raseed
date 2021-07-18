@@ -9,7 +9,7 @@ describe('BooksService', () => {
       Book.mockClear();
     });
 
-    test('should initialize repository class once',async () => {
+    test('should initialize repository class once', async () => {
       const sampleInput = {
         tenant: {
           name: 'Tenant Name',
@@ -31,10 +31,9 @@ describe('BooksService', () => {
       await BooksService.create(sampleInput);
       expect(Book).toHaveBeenCalledTimes(1);
       expect(Book).toHaveBeenCalledWith(sampleInput);
-
     });
 
-    test('should call repository function with right arguments',async () => {
+    test('should call repository function with right arguments', async () => {
       const mockResult = {
         id: 'sampleId12',
         tenant: {
@@ -58,16 +57,14 @@ describe('BooksService', () => {
       expect(actualResult).toStrictEqual(mockResult);
     });
 
-    test('should throw exception if repo methods throws an error',async () => {
+    test('should throw exception if repo methods throws an error', async () => {
       Book.mockReturnValueOnce({
         save: jest.fn().mockImplementation(() => {
           throw new Error();
         }),
       });
 
-      await expect(BooksService.create({}))
-        .rejects
-        .toThrow(Error);
+      await expect(BooksService.create({})).rejects.toThrow(Error);
     });
   });
 
@@ -76,7 +73,7 @@ describe('BooksService', () => {
       Book.mockClear();
     });
 
-    test('should call Book#findByPublicId once with right args',async () => {
+    test('should call Book#findByPublicId once with right args', async () => {
       Book.findByPublicIdOrFail = jest.fn().mockImplementation(() => ({
         toPublicObject: () => {},
       }));
@@ -84,17 +81,14 @@ describe('BooksService', () => {
       await BooksService.getById('sampleId');
       expect(Book.findByPublicIdOrFail).toHaveBeenCalledTimes(1);
       expect(Book.findByPublicIdOrFail).toHaveBeenCalledWith('sampleId');
-
     });
 
-    test('should throw an exception if exception is thrown repo methods',async () => {
+    test('should throw an exception if exception is thrown repo methods', async () => {
       Book.findByPublicIdOrFail = jest.fn().mockImplementation(() => {
         throw new Error();
       });
 
-      await expect(BooksService.getById('sampleId'))
-        .rejects
-        .toThrow(Error);
+      await expect(BooksService.getById('sampleId')).rejects.toThrow(Error);
     });
   });
 });

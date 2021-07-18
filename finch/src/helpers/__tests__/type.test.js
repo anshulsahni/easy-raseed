@@ -2,9 +2,8 @@ import { isNull, isObject } from '../type.js';
 
 describe('type helpers', () => {
   describe('#isNull', () => {
-
     test('should return true if null is passed', () => {
-      expect(isNull(null)).toBe(true)
+      expect(isNull(null)).toBe(true);
     });
 
     describe('should return false for non-null values', () => {
@@ -29,12 +28,12 @@ describe('type helpers', () => {
         [{}, 'empty object'],
         // eslint-disable-next-line no-new-object
         [new Object(), 'using Object class'],
-        [new function something(){}, 'initialiaze function'],
+        [new (function something() {})(), 'initialiaze function'],
         // TODO: with array it should return false
-        [[5], 'array']
+        [[5], 'array'],
       ])('isObject(%s) //%s', (value) => {
-        expect(isObject(value)).toBe(true)
-      })
+        expect(isObject(value)).toBe(true);
+      });
     });
 
     describe('should return false for following usecases', () => {
@@ -45,11 +44,10 @@ describe('type helpers', () => {
         [0, 'zero value'],
         [400, 'non-zero number'],
         [true, 'boolean'],
-        [null, 'null value']
+        [null, 'null value'],
       ])('isObject(%s) //%s', (value) => {
-        expect(isObject(value)).toBe(false)
+        expect(isObject(value)).toBe(false);
       });
     });
-
   });
 });

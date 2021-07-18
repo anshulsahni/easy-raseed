@@ -7,6 +7,5 @@ export const RESOURCE_NOT_FOUND = 404;
 export const UNAUTHORIZED = 401;
 export const FORBIDDEN = 403;
 
-
 // Server Errors
 export const INTERNAL_SERVER_ERROR = 500;

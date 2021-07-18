@@ -85,7 +85,7 @@ describe('EmailService', () => {
   });
 
   describe('#send()', () => {
-    test('should call transporter.sendEamil with params & return value retrieved from it',async () => {
+    test('should call transporter.sendEamil with params & return value retrieved from it', async () => {
       const mockSendMail = jest.fn().mockReturnValueOnce('mockInfoId');
       nodemailer.createTransport = jest.fn().mockReturnValueOnce({
         sendMail: mockSendMail,
@@ -107,39 +107,36 @@ describe('EmailService', () => {
       expect(returnedInfoId).toBe('mockInfoId');
     });
 
-    test('should raise exceptions on invalid email sender',async () => {
+    test('should raise exceptions on invalid email sender', async () => {
       const email = new EmailService();
-      await expect(email
-        .setSender('invalidsenderemail')
-        .setReceiver('mock@receiver.com')
-        .setContent('<html><body>Mock Content</body></html>')
-        .send())
-          .rejects
-          .toThrowError('Email can\'t be send without all mandatory paramets');
+      await expect(
+        email
+          .setSender('invalidsenderemail')
+          .setReceiver('mock@receiver.com')
+          .setContent('<html><body>Mock Content</body></html>')
+          .send(),
+      ).rejects.toThrowError("Email can't be send without all mandatory paramets");
     });
 
-    test('should raise exceptions on invalid email receiver',async () => {
+    test('should raise exceptions on invalid email receiver', async () => {
       const email = new EmailService();
-      await expect(email
-        .setSender('mock@sender.com')
-        .setReceiver('invalidreceiver')
-        .setContent('<html><body>Mock Content</body></html>')
-        .send())
-          .rejects
-          .toThrowError('Email can\'t be send without all mandatory paramets');
+      await expect(
+        email
+          .setSender('mock@sender.com')
+          .setReceiver('invalidreceiver')
+          .setContent('<html><body>Mock Content</body></html>')
+          .send(),
+      ).rejects.toThrowError("Email can't be send without all mandatory paramets");
     });
 
-    test('should raise exceptions when content is not set',async () => {
+    test('should raise exceptions when content is not set', async () => {
       const email = new EmailService();
-      await expect(email
-        .setSender('mock@sender.com')
-        .setReceiver('mock@receiver.com')
-        .send())
-          .rejects
-          .toThrowError('Email can\'t be send without all mandatory paramets');
+      await expect(
+        email.setSender('mock@sender.com').setReceiver('mock@receiver.com').send(),
+      ).rejects.toThrowError("Email can't be send without all mandatory paramets");
     });
 
-    test('should raise exception if an error is thrown by sendMail',async () => {
+    test('should raise exception if an error is thrown by sendMail', async () => {
       const mockSendMail = jest.fn().mockImplementation(() => {
         throw new Error('mock email error');
       });
@@ -149,24 +146,26 @@ describe('EmailService', () => {
 
       const email = new EmailService();
 
-      await expect(email
-        .setSender('mock@sender.com')
-        .setReceiver('mock@receiver.com')
-        .setContent('<html><body>Mock Content</body></html>')
-        .send())
-          .rejects
-          .toThrowError('mock email error')
+      await expect(
+        email
+          .setSender('mock@sender.com')
+          .setReceiver('mock@receiver.com')
+          .setContent('<html><body>Mock Content</body></html>')
+          .send(),
+      ).rejects.toThrowError('mock email error');
     });
   });
 });
 
 describe('#validateEmailParams()', () => {
   test('should return true if emails are valid & html is present', () => {
-    expect(validateEmailParams({
-      to: 'someone@sender.com',
-      from: 'someoneelse@receiver.com',
-      html: 'any_content',
-    })).toBe(true);
+    expect(
+      validateEmailParams({
+        to: 'someone@sender.com',
+        from: 'someoneelse@receiver.com',
+        html: 'any_content',
+      }),
+    ).toBe(true);
   });
 
   test('should raise excpetion if to email is invalid', () => {
@@ -176,7 +175,7 @@ describe('#validateEmailParams()', () => {
         from: 'someoneelse@receiver.com',
         html: 'any_content',
       });
-    }).toThrowError('Email can\'t be send without all mandatory paramets');
+    }).toThrowError("Email can't be send without all mandatory paramets");
   });
 
   test('should raise excpetion if from email is invalid', () => {
@@ -186,7 +185,7 @@ describe('#validateEmailParams()', () => {
         from: 'someoneelsereceiver.com',
         html: 'any_content',
       });
-    }).toThrowError('Email can\'t be send without all mandatory paramets');
+    }).toThrowError("Email can't be send without all mandatory paramets");
   });
 
   test('should raise excpetion if emailParams.html is not present', () => {
@@ -195,6 +194,6 @@ describe('#validateEmailParams()', () => {
         to: 'someone@sender.com',
         from: 'someoneelse@receiver.com',
       });
-    }).toThrowError('Email can\'t be send without all mandatory paramets');
+    }).toThrowError("Email can't be send without all mandatory paramets");
   });
 });

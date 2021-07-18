@@ -24,7 +24,6 @@ export default class BooksService {
       }
 
       return book.toPublicObject();
-
     } catch (error) {
       throw new AppError(DB_OPERATIONS_ERROR);
     }
@@ -32,17 +31,15 @@ export default class BooksService {
 
   static async getById(id) {
     try {
-      return (await Book.findByPublicIdOrFail(id))
-        .toPublicObject();
-    } catch(error) {
+      return (await Book.findByPublicIdOrFail(id)).toPublicObject();
+    } catch (error) {
       throw new Error(error);
     }
   }
-
 }
 
 function sendEmailToTenant(tenant, landlord) {
-  (new EmailService())
+  new EmailService()
     .setSender(landlord.email)
     .setReceiver(tenant.email)
     .setContent(`<strong>In future you'll receive PDF here</strong>`)
@@ -50,7 +47,7 @@ function sendEmailToTenant(tenant, landlord) {
 }
 
 function sendEmailToLandlord(landlord, tenant) {
-  (new EmailService())
+  new EmailService()
     .setSender(tenant.email)
     .setReceiver(landlord.email)
     .setContent(`<strong>${tenant.name} have sent you the rent receipts</strong>`)

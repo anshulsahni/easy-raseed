@@ -1,9 +1,7 @@
 import { isValidEmail } from '../validators.js';
 
 describe('Validator Helpers', () => {
-
   describe('#isValidEmail', () => {
-
     describe('should return true for following cases', () => {
       test.each([
         ['sample@something.com'],
@@ -16,15 +14,12 @@ describe('Validator Helpers', () => {
     });
 
     describe('should return false for following cases', () => {
-      test.each([
-        ['sample@something'],
-        ['withouttld@something'],
-        ['withoutAttheratesymbol'],
-      ])('isValidEmail(%s)', (value) => {
-        expect(isValidEmail(value)).toBe(false);
-      });
-    })
-
-
+      test.each([['sample@something'], ['withouttld@something'], ['withoutAttheratesymbol']])(
+        'isValidEmail(%s)',
+        (value) => {
+          expect(isValidEmail(value)).toBe(false);
+        },
+      );
+    });
   });
 });

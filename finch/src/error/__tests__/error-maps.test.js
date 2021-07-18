@@ -1,13 +1,8 @@
 import * as errorCodes from '../app-error.js';
-import {
-  defaultPublicMessages,
-  httpStatusCodeMap,
-} from '../error-maps.js';
+import { defaultPublicMessages, httpStatusCodeMap } from '../error-maps.js';
 
 describe('erroCodes', () => {
-    const errors = Object
-      .keys(errorCodes)
-      .filter(err => err !== 'default');
+  const errors = Object.keys(errorCodes).filter((err) => err !== 'default');
 
   describe('defaultPublicMessages', () => {
     describe('should contain default public message for each ', () => {
@@ -30,6 +25,4 @@ describe('erroCodes', () => {
       });
     });
   });
-
-
 });

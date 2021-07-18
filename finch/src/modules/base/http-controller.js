@@ -1,11 +1,8 @@
-import { httpResoponseCodes } from './constants.js'
-
+import { httpResoponseCodes } from './constants.js';
 
 export default class HttpController {
   respondInJson({ data, status, response }) {
-    response
-      .status(status)
-      .json(data);
+    response.status(status).json(data);
   }
 
   respondWithError({ errorData = {}, status, response }) {
@@ -13,7 +10,7 @@ export default class HttpController {
       error: errorData,
     };
 
-    this.respondInJson({ data,  status, response });
+    this.respondInJson({ data, status, response });
   }
 
   respondWithResourceCreated({ item = {}, response }) {

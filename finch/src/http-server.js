@@ -11,19 +11,19 @@ export default class HttpServer {
     this.options = {
       port: options.port || DEFAULT_PORT,
       middlewares: options.middlewares || [],
-    }
+    };
 
-    this.initializeMiddlewares()
+    this.initializeMiddlewares();
   }
 
   start() {
-    this.app.listen(this.options.port, '0.0.0.0',() => {
-      logInfo('app started',{port: this.options.port});
+    this.app.listen(this.options.port, '0.0.0.0', () => {
+      logInfo('app started', { port: this.options.port });
     });
   }
 
   initializeMiddlewares() {
-    this.options.middlewares.forEach(middleware => {
+    this.options.middlewares.forEach((middleware) => {
       this.app.use(middleware);
     });
   }
