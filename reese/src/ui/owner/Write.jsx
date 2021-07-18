@@ -7,47 +7,28 @@ import EmailInput from '../forms/EmailInput.jsx';
 import CheckboxInput from '../forms/CheckboxInput.jsx';
 
 import { theme } from '../../design-system/tokens.js';
-import FielGroup from '../forms/_elements/FieldGroup.js';
 
-let WriteOwnerWrapper;
+const WriteOwnerWrapper = styled.div`
+  border: 1px solid ${theme.borders.secondary};
+  margin-top: 5px;
+  padding: 20px;
+`;
 
 export default function WriteOwner(values = {}) {
   return (
     <WriteOwnerWrapper>
       <h3>Owner Details</h3>
-      <FielGroup>
+      <FieldGroup>
+        <TextInput name="landlord.name" value={values.name} label="Name" />
 
-        <TextInput
-          name="landlord.name"
-          value={values.name}
-          label="Name"
-        />
-
-        <TextInput
-          name="landlord.pan"
-          value={values.pan}
-          label="PAN No."
-        />
-
-      </FielGroup>
+        <TextInput name="landlord.pan" value={values.pan} label="PAN No." />
+      </FieldGroup>
 
       <FieldGroup>
-        <EmailInput
-          value={values.email}
-          name="landlord.email"
-        />
+        <EmailInput value={values.email} name="landlord.email" />
 
-        <CheckboxInput
-          name="landlord.sendEmail"
-          label="Send Email"
-        />
+        <CheckboxInput name="landlord.sendEmail" label="Send Email" />
       </FieldGroup>
     </WriteOwnerWrapper>
-  )
+  );
 }
-
-WriteOwnerWrapper = styled.div`
-  border: 1px solid ${theme.borders.secondary};
-  margin-top: 5px;
-  padding: 20px;
-`;

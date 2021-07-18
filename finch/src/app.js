@@ -17,7 +17,6 @@ const middlewares = [
   }),
 ];
 
-
 const server = new HttpServer({
   port: config.server.port,
   middlewares,

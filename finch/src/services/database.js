@@ -11,10 +11,7 @@ export default class Database {
   }
 
   connect() {
-    mongoose
-      .connection
-      .on('open', this.open)
-      .on('error', this.onError);
+    mongoose.connection.on('open', this.open).on('error', this.onError);
 
     const connectOptions = {
       useNewUrlParser: true,
@@ -22,10 +19,7 @@ export default class Database {
       useFindAndModify: false,
     };
 
-    mongoose.connect(
-      `mongodb://${this.host}/${this.name}`,
-      connectOptions,
-    );
+    mongoose.connect(`mongodb://${this.host}/${this.name}`, connectOptions);
   }
 
   open() {

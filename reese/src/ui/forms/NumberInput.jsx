@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
-import {
-  InputNumber as AntNumberInput,
-} from 'antd';
-
-import { theme } from '../../design-system/tokens.js';
+import { InputNumber as AntNumberInput } from 'antd';
 
 import Label from './_elements/Label.js';
 import ErrorMsg from './_elements/ErrorMsg.js';
@@ -12,14 +7,7 @@ import FieldWrapper from './_elements/FieldWrapper.js';
 
 import 'antd/dist/antd.css';
 
-let StyledInput;
-
-export default function NumberInput({
-  value,
-  validate,
-  name,
-  label,
-}) {
+export default function NumberInput({ value, validate, name, label }) {
   const [error, setError] = useState('');
 
   const onBlur = (event) => {
@@ -30,11 +18,7 @@ export default function NumberInput({
 
   return (
     <FieldWrapper>
-      {label && (
-        <Label htmlFor={name}>
-          {label}
-        </Label>
-      )}
+      {label && <Label htmlFor={name}>{label}</Label>}
 
       <AntNumberInput
         min={0}
@@ -49,12 +33,5 @@ export default function NumberInput({
 
       {error && <ErrorMsg>{error}</ErrorMsg>}
     </FieldWrapper>
-
-  )
+  );
 }
-
-StyledInput = styled.input`
-  width: 100%;
-  border-style: none;
-  border-bottom: 1px solid ${theme.forms.border.primary};
-`;

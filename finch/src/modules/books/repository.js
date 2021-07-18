@@ -4,10 +4,7 @@ import BaseRepository from '../base/repository.js';
 import BookSchema from './schema.js';
 
 class BooksRepository extends BaseRepository {
-  publicAttribs = [
-    'tenant',
-    'landlord',
-  ];
+  publicAttribs = ['tenant', 'landlord'];
 
   static async findByPublicIdOrFail(id) {
     const data = await this.findOne({ id });
@@ -17,7 +14,6 @@ class BooksRepository extends BaseRepository {
     }
 
     throw new Error('Entity Not Found');
-
   }
 }
 

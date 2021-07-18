@@ -19,8 +19,7 @@ describe('BooksRepository', () => {
       UserRepository.findOne = jest.fn();
       UserRepository.findOne.mockReturnValueOnce(_book);
 
-      const result = await UserRepository
-        .findByPublicIdOrFail('sampleId12');
+      const result = await UserRepository.findByPublicIdOrFail('sampleId12');
 
       expect(result).toEqual(_book);
     });
@@ -33,6 +32,5 @@ describe('BooksRepository', () => {
         await UserRepository.findByPublicIdOrFail('anshul');
       }).rejects.toThrow();
     });
-
   });
 });

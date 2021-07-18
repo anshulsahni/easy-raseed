@@ -1,4 +1,4 @@
-name: Validate Finch
+name: Validate Reese
 on:
   pull_request:
     types:
@@ -6,7 +6,7 @@ on:
       - synchronize
       - reopened
     paths:
-      - "finch/**"
+      - "reese/**"
 
 jobs:
   validate:
@@ -14,19 +14,18 @@ jobs:
     runs-on: [ubuntu-latest]
     defaults:
       run:
-        working-directory: finch
+        working-directory: reese
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
       - name: Setup Cache & Install Dependencies
         uses: bahmutov/npm-install@v1
         with:
-          working-directory: finch
+          working-directory: reese
           install-command: npm ci
-
-      - name: Run Unit tests
-        run: npm run test:ci
 
       - name: Lint Code
         run: npm run lint
+
+      # TODO: Added step to run unit tests also

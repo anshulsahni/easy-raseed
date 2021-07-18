@@ -12,8 +12,7 @@ describe('CrudController', () => {
   });
 
   describe('#create', () => {
-    test('should call service#create() method with request payload',async () => {
-
+    test('should call service#create() method with request payload', async () => {
       const samplePayload = {
         key1: 'value1',
         key2: 'value2',
@@ -35,12 +34,11 @@ describe('CrudController', () => {
         item: samplePayload,
         success: true,
       });
-
     });
   });
 
   describe('#getById', () => {
-    test('should call service#getById() method with id in request.params',async () => {
+    test('should call service#getById() method with id in request.params', async () => {
       const mockReq = httpMocks.createRequest({
         params: { id: 'sampleId' },
       });
@@ -61,7 +59,6 @@ describe('CrudController', () => {
         item: { sample: 'response' },
         success: true,
       });
-
     });
   });
 
@@ -75,7 +72,6 @@ describe('CrudController', () => {
       expect(mockRes.statusCode).toBe(200);
       expect(mockRes._isJSON()).toBe(true);
       expect(mockRes._isEndCalled()).toBe(true);
-
     });
   });
 
@@ -89,9 +85,7 @@ describe('CrudController', () => {
       expect(mockRes.statusCode).toBe(200);
       expect(mockRes._isJSON()).toBe(true);
       expect(mockRes._isEndCalled()).toBe(true);
-
     });
-
   });
 
   describe('#initRoutes', () => {
@@ -119,7 +113,6 @@ describe('CrudController', () => {
       expect(controller.router.patch).toHaveBeenCalledTimes(1);
       expect(controller.router.patch.mock.calls[0][0]).toBe('/test/:id');
       expect(controller.router.patch.mock.calls[0][1].name).toBe('bound update');
-
     });
   });
 
@@ -133,21 +126,16 @@ describe('CrudController', () => {
 
       expect(mockControllerFn).toHaveBeenCalledTimes(1);
       expect(mockControllerFn).toHaveBeenCalledWith(req, res);
-
     });
 
     test('should  call next callback when controller rejects', () => {
       const mockCatch = jest.fn();
-      const mockControllerFn = jest
-        .fn()
-        .mockReturnValue({ catch: mockCatch });
+      const mockControllerFn = jest.fn().mockReturnValue({ catch: mockCatch });
       const mockNext = jest.fn();
 
-      crudController
-        .handleException(mockControllerFn)({}, {}, mockNext);
+      crudController.handleException(mockControllerFn)({}, {}, mockNext);
 
       expect(mockCatch).toHaveBeenCalledWith(mockNext);
-
     });
   });
 });

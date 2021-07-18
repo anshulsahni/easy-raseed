@@ -1,7 +1,7 @@
 import forOwn from 'lodash.forown';
 import omit from 'lodash.omit';
 
-import { isObject } from './type.js'
+import { isObject } from './type.js';
 
 export const omitRecursive = (object = {}, props = []) => {
   const newObject = omit(object, props);
@@ -12,4 +12,4 @@ export const omitRecursive = (object = {}, props = []) => {
   });
 
   return newObject;
-}
+};

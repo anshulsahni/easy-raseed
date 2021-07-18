@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-
-import BaseButton from './BaseButton.jsx';
 import { theme } from '../../design-system/tokens.js';
+import BaseButton from './BaseButton.jsx';
 
 const RectButton = styled(BaseButton)`
   height: 35px;

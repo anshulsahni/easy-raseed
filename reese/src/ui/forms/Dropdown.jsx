@@ -7,31 +7,18 @@ import Label from './_elements/Label.js';
 
 const AntOption = AntSelect.Option;
 
-export default function Dropdown({
-  value,
-  validate,
-  name,
-  label,
-  options = [],
-  ansh,
-  emptySelectLabel = 'Select',
-  ...props
-}) {
+export default function Dropdown({ value, validate, name, label, options = [], ...props }) {
   const [error, setError] = useState('');
 
   const onBlur = (event) => {
     if (validate) {
-      setError(validate(event.target.value))
+      setError(validate(event.target.value));
     }
   };
 
   return (
     <FieldWrapper>
-      {label && (
-        <Label htmlFor={name}>
-          {label}
-        </Label>
-      )}
+      {label && <Label htmlFor={name}>{label}</Label>}
 
       <AntSelect
         defaultValue={value}
@@ -43,10 +30,7 @@ export default function Dropdown({
         {...props}
       >
         {options.map((option, index) => (
-          <AntOption
-            value={option.value}
-            key={`${option.value}_${index}`}
-          >
+          <AntOption value={option.value} key={`${option.value}_${index}`}>
             {option.label}
           </AntOption>
         ))}
@@ -54,6 +38,5 @@ export default function Dropdown({
 
       {error && <ErrorMsg>{error}</ErrorMsg>}
     </FieldWrapper>
-
   );
 }

@@ -30,7 +30,6 @@ describe('HTTPController', () => {
         key1: 'value1',
         key2: 'value2',
       });
-
     });
   });
 
@@ -56,7 +55,6 @@ describe('HTTPController', () => {
           msg: 'Some error message',
         },
       });
-
     });
   });
 
@@ -109,11 +107,7 @@ describe('HTTPController', () => {
   describe('#respondWithList', () => {
     test('should call reponse with status 200 & data object as items', () => {
       const mockResp = httpMocks.createResponse();
-      const sampleData = [
-        { key1: 'value1' },
-        { key2: 'value2' },
-        { key3: 'value3' },
-      ];
+      const sampleData = [{ key1: 'value1' }, { key2: 'value2' }, { key3: 'value3' }];
 
       controller.respondWithList({
         items: sampleData,
@@ -129,5 +123,4 @@ describe('HTTPController', () => {
       });
     });
   });
-
 });

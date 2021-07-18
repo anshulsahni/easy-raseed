@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { DatePicker as AntDatePicker } from 'antd';
 
 import Label from './_elements/Label.js';
@@ -16,7 +16,7 @@ export function QuarterInput(props) {
 export function MonthInput(props) {
   return _DateInput({
     picker: 'month',
-    ...props
+    ...props,
   });
 }
 
@@ -27,29 +27,12 @@ export function YearInput(props) {
   });
 }
 
-function _DateInput({
-  type,
-  validate,
-  name,
-  label,
-  ...props
-}) {
+function _DateInput({ type, validate, name, label, ...props }) {
   return (
     <FieldWrapper>
-      {label && (
-        <Label htmlFor={name}>
-          {label}
-        </Label>
-      )}
+      {label && <Label htmlFor={name}>{label}</Label>}
 
-      <AntDateRangePicker
-        name={name}
-        id={name}
-        style={{ width: '100%' }}
-        size="large"
-        {...props}
-      />
+      <AntDateRangePicker name={name} id={name} style={{ width: '100%' }} size="large" {...props} />
     </FieldWrapper>
-
   );
 }

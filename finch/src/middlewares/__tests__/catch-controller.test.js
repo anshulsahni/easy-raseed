@@ -22,15 +22,15 @@ describe('CatchController', () => {
         errorCode: 'MOCK_ERROR_CODE',
       };
 
-      (new CatchController({})).handleError(mockError, mockReq, mockRes);
+      new CatchController({}).handleError(mockError, mockReq, mockRes);
       expect(mockRes.statusCode).toBe(400);
       expect(mockRes._isJSON()).toBe(true);
       expect(mockRes._isEndCalled()).toBe(true);
       expect(mockRes._getJSONData()).toStrictEqual({
         error: {
-            description: 'mock error message',
-            code: 'MOCK_ERROR_CODE',
-          },
+          description: 'mock error message',
+          code: 'MOCK_ERROR_CODE',
+        },
       });
     });
   });

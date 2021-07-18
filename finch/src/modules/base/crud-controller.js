@@ -38,7 +38,7 @@ export default class CrudController extends HttpController {
   handleException(controller) {
     return (req, res, next) => {
       controller(req, res).catch(next);
-    }
+    };
   }
 
   initRoutes() {

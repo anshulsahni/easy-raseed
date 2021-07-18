@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { isValidEmail, isValidPanNumber } from '../../helpers/validators.js'
+import { isValidEmail, isValidPanNumber } from '../../helpers/validators.js';
 
 const { Schema } = mongoose;
 
@@ -29,7 +29,7 @@ export default class LandlordSchema extends Schema {
         minlength: 10,
         maxlength: 10,
         validate: {
-          validator: isValidPanNumber
+          validator: isValidPanNumber,
         },
         select: true,
       },

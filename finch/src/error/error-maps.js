@@ -1,4 +1,4 @@
-import { INTERNAL_SERVER_ERROR } from "../http/status-codes.js";
+import { INTERNAL_SERVER_ERROR } from '../http/status-codes.js';
 
 export const httpStatusCodeMap = {
   DB_OPERATIONS_ERROR: INTERNAL_SERVER_ERROR,

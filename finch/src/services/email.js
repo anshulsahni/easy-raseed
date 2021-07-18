@@ -13,13 +13,11 @@ const nodeMailerOptions = {
     user: smtp.user,
     pass: smtp.password,
   },
-}
+};
 
 export default class Email {
-
   constructor() {
-    this.transporter = nodemailer
-      .createTransport(nodeMailerOptions);
+    this.transporter = nodemailer.createTransport(nodeMailerOptions);
 
     this.emailParams = {};
   }
@@ -42,7 +40,7 @@ export default class Email {
   async send() {
     if (validateEmailParams(this.emailParams)) {
       try {
-        const infoId = await this.transporter.sendMail({...this.emailParams});
+        const infoId = await this.transporter.sendMail({ ...this.emailParams });
 
         return infoId;
       } catch (error) {
@@ -55,12 +53,8 @@ export default class Email {
 }
 
 export function validateEmailParams(emailParams) {
-  if (
-    isValidEmail(emailParams.to) &&
-    isValidEmail(emailParams.from) &&
-    emailParams.html
-  ) return true;
+  if (isValidEmail(emailParams.to) && isValidEmail(emailParams.from) && emailParams.html)
+    return true;
 
-  throw new Error('Email can\'t be send without all mandatory paramets');
-
+  throw new Error("Email can't be send without all mandatory paramets");
 }
