@@ -2,9 +2,12 @@ import AppError, { DB_OPERATIONS_ERROR } from '../../error/app-error.js';
 import EmailService from '../../services/email.js';
 
 import Book from './repository.js';
+import { validateCreateInput } from './validators.js';
 
 export default class BooksService {
   static async create(input) {
+    validateCreateInput(input);
+
     let book = new Book(input);
 
     const shouldSendEmail = {

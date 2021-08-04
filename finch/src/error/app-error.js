@@ -12,3 +12,5 @@ export default class AppError extends Error {
 }
 
 export const DB_OPERATIONS_ERROR = 'DB_OPERATIONS_ERROR';
+
+export const REQUEST_INPUT_VALIDATION_ERROR = 'REQUEST_INPUT_VALIDATION_ERROR';
