@@ -16,12 +16,15 @@
   "license": "ISC",
   "dependencies": {
     "cors": "2.8.5",
+    "dayjs": "1.10.6",
     "express": "4.17.1",
+    "lodash": "4.17.21",
     "lodash.forown": "4.4.0",
     "lodash.omit": "4.5.0",
     "mongoose": "5.11.13",
     "nanoid": "3.1.20",
-    "nodemailer": "6.4.17"
+    "nodemailer": "6.4.17",
+    "validate.js": "0.13.1"
   },
   "devDependencies": {
     "@babel/core": "7.14.3",
@@ -31,6 +34,7 @@
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "3.4.0",
     "jest": "27.0.3",
+    "jest-extended": "0.11.5",
     "mockingoose": "2.15.2",
     "node-mocks-http": "1.10.1",
     "nodemon": "2.0.9",
@@ -39,6 +43,9 @@
   "jest": {
     "transform": {
       ".js": "babel-jest"
-    }
+    },
+    "setupFilesAfterEnv": [
+      "jest-extended"
+    ]
   }
 }
