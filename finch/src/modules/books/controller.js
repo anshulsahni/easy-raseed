@@ -4,5 +4,5 @@ import BookService from './service.js';
 
 export default class ReceiptController extends CrudController {
   service = BookService;
-  baseRoute = '/receipts';
+  baseRoute = '/books';
 }

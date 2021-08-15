@@ -25,7 +25,7 @@ export default class ReceiptSchema extends BaseSchema {
       paid: {
         type: Boolean,
         select: true,
-        default: true,
+        default: false,
       },
     });
   }

@@ -1,30 +1,44 @@
 import AppError, { DB_OPERATIONS_ERROR } from '../../error/app-error.js';
+import { pickFromObj } from '../../helpers/object.js';
 import EmailService from '../../services/email.js';
 
 import Book from './repository.js';
+import { getReceipts } from './utils/receipts.js';
 import { validateCreateInput } from './validators.js';
 
 export default class BooksService {
   static async create(input) {
     validateCreateInput(input);
 
-    let book = new Book(input);
+    let receipts;
+    if (input.rentalData) {
+      receipts = getReceipts(input.rentalData);
+    } else {
+      receipts = input.receipts;
+    }
 
-    const shouldSendEmail = {
-      toLandlord: input?.landlord?.sendEmail,
-      toTenant: input?.tenant?.sendEmail,
+    const newBookData = {
+      receipts,
+      ...pickFromObj(input, ['tenant', 'landlord']),
     };
+
+    let book = new Book(newBookData);
+
+    // const shouldSendEmail = {
+    //   toLandlord: input?.landlord?.sendEmail,
+    //   toTenant: input?.tenant?.sendEmail,
+    // };
 
     try {
       book = await book.save();
 
-      if (shouldSendEmail.toLandlord) {
-        sendEmailToLandlord(book.landlord, book.tenant);
-      }
+      // if (shouldSendEmail.toLandlord) {
+      //   sendEmailToLandlord(book.landlord, book.tenant);
+      // }
 
-      if (shouldSendEmail.toTenant) {
-        sendEmailToTenant(book.tenant, book.landlord);
-      }
+      // if (shouldSendEmail.toTenant) {
+      //   sendEmailToTenant(book.tenant, book.landlord);
+      // }
 
       return book.toPublicObject();
     } catch (error) {
