@@ -13,3 +13,6 @@ export const omitRecursive = (object = {}, props = []) => {
 
   return newObject;
 };
+
+export { forOwn as forEach };
+export { default as pickFromObj } from 'lodash/pick.js';
